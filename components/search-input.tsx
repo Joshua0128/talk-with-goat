@@ -1,20 +1,20 @@
-"use client"
+'use client'
 
-import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ChangeEventHandler, useEffect, useState } from "react";
-import { useDebounce } from "@/hooks/use-debounce";
-import qs from "query-string";
+import { Input } from '@/components/ui/input'
+import { useDebounce } from '@/hooks/use-debounce'
+import { Search } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import qs from 'query-string'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 
 const SearchInput = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const categoryId = searchParams.get("categoryId")
-  const name = searchParams.get("name")
+  const categoryId = searchParams.get('categoryId')
+  const name = searchParams.get('name')
 
-  const [value, setValue] = useState(name || "")
+  const [value, setValue] = useState(name || '')
   const debouncedValue = useDebounce<string>(value, 500)
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -24,22 +24,24 @@ const SearchInput = () => {
   useEffect(() => {
     const query = {
       name: debouncedValue,
-      categoryId
+      categoryId,
     }
 
-    const url = qs.stringifyUrl({
-      url: window.location.href,
-      query,
-    }, {skipEmptyString: true, skipNull: true})
-    
+    const url = qs.stringifyUrl(
+      {
+        url: window.location.href,
+        query,
+      },
+      { skipEmptyString: true, skipNull: true },
+    )
+
     router.push(url)
   }, [debouncedValue, router, categoryId])
 
-
   return (
     <div className="relative">
-      <Search className="absolute h-4 w-4 top-3 left-4"/>
-      <Input 
+      <Search className="absolute h-4 w-4 top-3 left-4" />
+      <Input
         onChange={onChange}
         value={value}
         placeholder="Search..."
@@ -48,5 +50,5 @@ const SearchInput = () => {
     </div>
   )
 }
- 
-export default SearchInput;
+
+export default SearchInput

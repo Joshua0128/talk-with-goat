@@ -1,10 +1,8 @@
-"use client"
+'use client'
 
-import { cn } from "@/lib/utils";
-import { Home, Plus, Settings } from "lucide-react";
-
-import { usePathname, useRouter } from "next/navigation" 
-
+import { cn } from '@/lib/utils'
+import { Home, Plus, Settings } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Sidebar = () => {
   const pathname = usePathname()
@@ -13,22 +11,22 @@ const Sidebar = () => {
   const routes = [
     {
       icon: Home,
-      href: "/",
-      label: "Home",
-      pro: false
+      href: '/',
+      label: 'Home',
+      pro: false,
     },
     {
       icon: Plus,
-      href: "/companion/new",
-      label: "Create",
-      pro: true
+      href: '/companion/new',
+      label: 'Create',
+      pro: true,
     },
     {
-      icon: Settings, 
-      href: "/settings",
-      label: "Settings",
-      pro: false
-    } 
+      icon: Settings,
+      href: '/settings',
+      label: 'Settings',
+      pro: false,
+    },
   ]
 
   const onNavigate = (url: string, pro: boolean) => {
@@ -43,7 +41,10 @@ const Sidebar = () => {
             <div
               onClick={() => onNavigate(route.href, route.pro)}
               key={route.href}
-              className={cn("text-muted-foreground text-xs group flex p-1 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition", pathname === route.href && "bg-primary/10 text-primary")}
+              className={cn(
+                'text-muted-foreground text-xs group flex p-1 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition',
+                pathname === route.href && 'bg-primary/10 text-primary',
+              )}
             >
               <div className="flex flex-col gap-y-2 items-center flex-1">
                 <route.icon className="h-5 w-5" />
@@ -56,5 +57,5 @@ const Sidebar = () => {
     </div>
   )
 }
- 
-export default Sidebar;
+
+export default Sidebar
